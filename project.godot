@@ -17,6 +17,13 @@ config/features=PackedStringArray("4.2", "GL Compatibility")
 
 project/assembly_name="Simple Platformer"
 
+[layer_names]
+
+2d_physics/layer_1="World"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Enemy"
+2d_physics/layer_4="Items"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
