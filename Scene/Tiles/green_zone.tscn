@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://cqx0imw6q6a2i" path="res://Scene/Tiles/greenzone.tres" id="1_thi7n"]
 
-[node name="GreenZone" type="TileMap"]
+[node name="Greenzone" type="TileMap"]
 tile_set = ExtResource("1_thi7n")
 format = 2
 layer_0/name = "Main"
