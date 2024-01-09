@@ -7,7 +7,7 @@ public partial class Hero : CharacterBody2D
     [Export] public double speed = 100;
 
     protected enum HeroState {Idle, Move, Death, Jump, None};
-    HeroState state = HeroState.None;
+    private HeroState state = HeroState.None;
 
     public override void _Ready()
     {
@@ -20,17 +20,20 @@ public partial class Hero : CharacterBody2D
     {
         base._PhysicsProcess(delta);
 
-        Vector2 velocity = Velocity;
-        float direction = Input.GetAxis("MoveLeft", "MoveRight");
-
-        velocity.X = (float) speed * direction;
-  
-        if (!IsOnFloor()) {
-            velocity.Y += (float) gravity * (float) delta;
+        switch (state) {
+            case HeroState.Idle:
+                StateIdle(delta);
+                break;
+            case HeroState.Move:
+                StateIdle(delta);
+                break;
+            case HeroState.Jump:
+                StateIdle(delta);
+                break;
+            case HeroState.Death:
+                StateIdle(delta);
+                break;
         }
-
-        Velocity = velocity;
-        MoveAndSlide();
     }
 
     public virtual void StateIdle(double delta) {}
