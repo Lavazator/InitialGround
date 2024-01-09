@@ -27,6 +27,8 @@ public partial class Cyborg : Hero
         float direction = GetDirection();
 
         velocity.X = (float) speed * direction;
+        Velocity = velocity;
+
         animationPlayer.Play("Cyborg/Move");
 
         if (direction == 0) {

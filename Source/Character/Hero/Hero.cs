@@ -4,7 +4,7 @@ using System;
 public partial class Hero : CharacterBody2D
 {
     [Export] private double gravity = 980.0;
-    [Export] public double speed = 100;
+    [Export] public double speed = 200;
 
     protected enum HeroState {Idle, Move, Death, Jump, None};
     protected HeroState state = HeroState.None;
