@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://niqeuo6ont8c"]
+[gd_scene load_steps=5 format=3 uid="uid://niqeuo6ont8c"]
 
 [ext_resource type="PackedScene" uid="uid://dg700jmyxvep3" path="res://Scene/Characters/Hero/HeroTemplate.tscn" id="1_udrje"]
 [ext_resource type="Texture2D" uid="uid://bqy4ky0rxibil" path="res://StoreAssets/Character/Hero/Cyborg_Sheet.png" id="2_7i2mh"]
 [ext_resource type="Script" path="res://Source/Character/Hero/Cyborg.cs" id="2_ls4yo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3s6w5"]
+size = Vector2(11, 31)
 
 [node name="Cyborg" instance=ExtResource("1_udrje")]
 script = ExtResource("2_ls4yo")
@@ -11,3 +14,7 @@ script = ExtResource("2_ls4yo")
 texture = ExtResource("2_7i2mh")
 hframes = 8
 vframes = 12
+
+[node name="CollisionShape" parent="." index="3"]
+position = Vector2(2.5, 8.5)
+shape = SubResource("RectangleShape2D_3s6w5")
