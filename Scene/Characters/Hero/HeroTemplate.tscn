@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dg700jmyxvep3"]
+
+[node name="HeroTemplate" type="CharacterBody2D"]
+
+[node name="Sprite" type="Sprite2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="EffectPlayer" type="AnimationPlayer" parent="."]
