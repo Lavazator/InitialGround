@@ -20,6 +20,15 @@ public partial class Hero : CharacterBody2D
         animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
     }
 
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+        
+        if (GetDirection() != 0) {
+            sprite.FlipH = !(GetDirection() > 0);
+        }
+    }
+
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
