@@ -36,8 +36,6 @@ public partial class Hero : CharacterBody2D
         if (GetDirection() != 0) {
             sprite.FlipH = !(GetDirection() > 0);
         }
-
-        GD.Print(state);
     }
 
     public override void _PhysicsProcess(double delta)
