@@ -98,5 +98,5 @@ libraries = {
 }
 
 [node name="CollisionShape" parent="." index="3"]
-position = Vector2(2.5, 8.5)
+position = Vector2(1.5, 8.5)
 shape = SubResource("RectangleShape2D_3s6w5")
