@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://niqeuo6ont8c"]
 
 [ext_resource type="PackedScene" uid="uid://dg700jmyxvep3" path="res://Scene/Characters/Hero/HeroTemplate.tscn" id="1_udrje"]
-[ext_resource type="Texture2D" uid="uid://bqy4ky0rxibil" path="res://StoreAssets/Character/Hero/Cyborg_Sheet.png" id="2_7i2mh"]
+[ext_resource type="Texture2D" uid="uid://bqy4ky0rxibil" path="res://StoreAssets/Character/Hero/CyborgSheet.png" id="2_7i2mh"]
 [ext_resource type="Script" path="res://Source/Character/Hero/Cyborg.cs" id="2_ls4yo"]
 
 [sub_resource type="Animation" id="Animation_dhusv"]
@@ -24,6 +24,21 @@ _data = {
 "RESET": SubResource("Animation_dhusv")
 }
 
+[sub_resource type="Animation" id="Animation_8jveh"]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [19]
+}
+
 [sub_resource type="Animation" id="Animation_2qavc"]
 length = 0.4
 loop_mode = 1
@@ -37,7 +52,22 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [48, 49, 50, 51]
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_112gk"]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [16, 17, 18, 19]
 }
 
 [sub_resource type="Animation" id="Animation_xae8r"]
@@ -53,37 +83,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [72, 73, 74, 75, 76, 77]
-}
-
-[sub_resource type="Animation" id="Animation_112gk"]
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [56, 57, 58, 59]
-}
-
-[sub_resource type="Animation" id="Animation_8jveh"]
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [59]
+"values": [8, 9, 10, 11, 12, 13]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qgnq2"]
@@ -95,7 +95,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3s6w5"]
-size = Vector2(11, 31)
+size = Vector2(11.5, 30)
 
 [node name="Cyborg" instance=ExtResource("1_udrje")]
 script = ExtResource("2_ls4yo")
@@ -104,8 +104,7 @@ jumpImpulse = 200.0
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource("2_7i2mh")
 hframes = 8
-vframes = 12
-frame = 72
+vframes = 3
 
 [node name="AnimationPlayer" parent="." index="1"]
 libraries = {
@@ -114,5 +113,5 @@ libraries = {
 }
 
 [node name="CollisionShape" parent="." index="3"]
-position = Vector2(1.5, 8.5)
+position = Vector2(2.25, 3)
 shape = SubResource("RectangleShape2D_3s6w5")
