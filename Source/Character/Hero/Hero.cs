@@ -3,7 +3,7 @@ using System;
 
 public partial class Hero : CharacterBody2D
 {
-    [Export] private double gravity = 980.0;
+    [Export] public double gravity = 500;
     [Export] public double speed = 200;
 
     protected enum HeroState {Idle, Move, Death, Jump, None};
@@ -18,6 +18,9 @@ public partial class Hero : CharacterBody2D
         base._Ready();
         sprite = GetNode<Sprite2D>("Sprite");
         animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+
+        FloorSnapLength = 32;
+        FloorConstantSpeed = true;
     }
 
     public override void _Process(double delta)
@@ -33,10 +36,6 @@ public partial class Hero : CharacterBody2D
     {
         base._PhysicsProcess(delta);
         
-        if (!IsOnFloor()) {
-            ApplyGravity(delta);
-        }
-
         switch (state) {
             case HeroState.Idle:
                 StateIdle(delta);
@@ -50,6 +49,10 @@ public partial class Hero : CharacterBody2D
             case HeroState.Death:
                 StateDeath();
                 break;
+        }
+
+        if (!IsOnFloor()) {
+            ApplyGravity(delta);
         }
     }
 
@@ -65,6 +68,7 @@ public partial class Hero : CharacterBody2D
     protected void ApplyGravity(double delta) {
         Vector2 velocity = Velocity;
         velocity.Y += (float)gravity * (float)delta;
+
         Velocity = velocity;
         MoveAndSlide();
     }

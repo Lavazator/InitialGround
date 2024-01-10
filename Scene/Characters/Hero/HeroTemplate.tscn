@@ -4,6 +4,7 @@
 
 [node name="HeroTemplate" type="CharacterBody2D"]
 collision_layer = 2
+floor_constant_speed = true
 script = ExtResource("1_sftew")
 
 [node name="Sprite" type="Sprite2D" parent="."]
