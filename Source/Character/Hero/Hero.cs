@@ -5,9 +5,11 @@ public partial class Hero : CharacterBody2D
 {
     [Export] public double gravity = 500.0d;
     [Export] public double speed = 200.0d;
-    [Export] public double jumpImpulse = 100.0d; 
+    [Export] public double jumpImpulse = 100.0d;
 
-    protected enum HeroState {Idle, Move, Death, Jump, None};
+    protected bool jumpPeak = false;
+
+    protected enum HeroState {Idle, Move, Death, Jump, Fall, None};
     protected HeroState state = HeroState.None;
 
     // Node
@@ -47,6 +49,9 @@ public partial class Hero : CharacterBody2D
             case HeroState.Jump:
                 StateJump(delta);
                 break;
+            case HeroState.Fall:
+                StateFall(delta);
+                break;
             case HeroState.Death:
                 StateDeath();
                 break;
@@ -60,6 +65,7 @@ public partial class Hero : CharacterBody2D
     public virtual void StateIdle(double delta) {}
     public virtual void StateMove(double delta) {}
     public virtual void StateJump(double delta) {}
+    public virtual void StateFall(double delta) {}
     public virtual void StateDeath() {}
 
     public float GetDirection() {
@@ -74,10 +80,21 @@ public partial class Hero : CharacterBody2D
         MoveAndSlide();
     }
 
-    protected void Jump() {
+    protected void StartJump() {
+        state = HeroState.Jump;
+        jumpPeak = false;
+        animationPlayer.Play("Cyborg/Jump");
+        
         Vector2 velocity = Velocity;
-        velocity.Y = (float)jumpImpulse * -1.0f;
+        velocity.Y = (float)-jumpImpulse;
         Velocity = velocity;
         MoveAndSlide();
+    }
+
+    protected void CheckJumpPeak() {
+        if (Velocity.Y >= 0 && !jumpPeak) {
+            jumpPeak = true;
+            state = HeroState.Fall;
+        }
     }
 }

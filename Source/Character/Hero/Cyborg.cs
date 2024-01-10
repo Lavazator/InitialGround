@@ -10,6 +10,11 @@ public partial class Cyborg : Hero
         state = HeroState.Idle;
     }
 
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+    }
+
     public override void StateIdle(double delta)
     {
         base.StateIdle(delta);
@@ -20,9 +25,7 @@ public partial class Cyborg : Hero
         }
 
         if (IsOnFloor() && Input.IsActionJustPressed("Jump")) {
-            state = HeroState.Jump;
-            Jump();
-            animationPlayer.Play("Cyborg/Jump");
+            StartJump();
         }
     }
 
@@ -38,9 +41,12 @@ public partial class Cyborg : Hero
         }
 
         if (IsOnFloor() && Input.IsActionJustPressed("Jump")) {
-            state = HeroState.Jump;
-            Jump();
-            animationPlayer.Play("Cyborg/Jump");
+            StartJump();
+            return;
+        }
+
+        if (!IsOnFloor()) {
+            state = HeroState.Fall;
             return;
         }
 
@@ -55,14 +61,27 @@ public partial class Cyborg : Hero
     public override void StateJump(double delta)
     {
         base.StateJump(delta);
+        CheckJumpPeak();
+
+        if (jumpPeak) return;
 
         Vector2 velocity = Velocity;
         float direction = GetDirection();
 
         velocity.X = (float)speed * direction;
         Velocity = velocity;
+    }
 
-        if (IsOnFloor()) state = HeroState.Idle;
-        if (IsOnFloor() && direction != 0) state = HeroState.Move;
+    public override void StateFall(double delta)
+    {
+        base.StateFall(delta);
+
+        if (IsOnFloor()) {
+            if (GetDirection() != 0) {
+                state = HeroState.Move;
+            } else {
+                state = HeroState.Idle;
+            }
+        }
     }
 }
