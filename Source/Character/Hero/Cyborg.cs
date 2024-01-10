@@ -51,6 +51,7 @@ public partial class Cyborg : Hero
         }
 
         if (!IsOnFloor()) {
+            animationPlayer.Play("Cyborg/Fall");
             state = HeroState.Fall;
             return;
         }
