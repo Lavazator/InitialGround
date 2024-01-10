@@ -1,6 +1,9 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://cqx0imw6q6a2i"]
+[gd_resource type="TileSet" load_steps=4 format=3 uid="uid://cqx0imw6q6a2i"]
 
 [ext_resource type="Texture2D" uid="uid://bg4r2njje7aky" path="res://StoreAssets/Tileset/FreeGreenZoneTileset.png" id="1_apk4d"]
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_lv6dk"]
+tile_data = PackedInt32Array(0, 65537, 0, 65536, 65537, 1)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7jtmr"]
 resource_name = "GreenZone"
@@ -384,3 +387,4 @@ tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 0
 sources/1 = SubResource("TileSetAtlasSource_7jtmr")
+pattern_0 = SubResource("TileMapPattern_lv6dk")

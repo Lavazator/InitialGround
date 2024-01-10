@@ -7,7 +7,6 @@ public partial class Cyborg : Hero
     public override void _Ready()
     {
         base._Ready();
-        state = HeroState.Idle;
     }
 
     public override void _Process(double delta)
@@ -32,6 +31,7 @@ public partial class Cyborg : Hero
         velocity.Y += (float)gravity * (float)delta;
 
         Velocity = velocity;
+        MoveAndSlide();
     }
 
     public override void StateMove(double delta)
@@ -41,6 +41,10 @@ public partial class Cyborg : Hero
         float direction = GetDirection();
 
         if (direction == 0) {
+            velocity.X = 0;
+            Velocity = velocity;
+            MoveAndSlide();
+            
             state = HeroState.Idle;
             return;
         }

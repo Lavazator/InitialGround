@@ -10,7 +10,7 @@ public partial class Hero : CharacterBody2D
     protected bool jumpPeak = false;
 
     protected enum HeroState {Idle, Move, Death, Jump, Fall, None};
-    protected HeroState state = HeroState.None;
+    protected HeroState state = HeroState.Idle;
 
     // Node
     protected Sprite2D sprite;
