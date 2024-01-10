@@ -27,6 +27,11 @@ public partial class Cyborg : Hero
         if (EnterJump()) {
             StartJump();
         }
+
+        Vector2 velocity = Velocity;
+        velocity.Y += (float)gravity * (float)delta;
+
+        Velocity = velocity;
     }
 
     public override void StateMove(double delta)
@@ -51,6 +56,8 @@ public partial class Cyborg : Hero
         }
 
         velocity.X = (float) speed * direction;
+        velocity.Y += (float)gravity * (float)delta;
+
         Velocity = velocity;
 
         animationPlayer.Play("Cyborg/Move");
@@ -67,9 +74,13 @@ public partial class Cyborg : Hero
 
         Vector2 velocity = Velocity;
         float direction = GetDirection();
+        
 
         velocity.X = (float)speed * direction;
+        velocity.Y += (float)gravity * (float)delta;
+
         Velocity = velocity;
+        MoveAndSlide();
     }
 
     public override void StateFall(double delta)
@@ -80,7 +91,10 @@ public partial class Cyborg : Hero
         float direction = GetDirection();
 
         velocity.X = (float)speed * direction;
+        velocity.Y += (float)gravity * (float)delta;
+
         Velocity = velocity;
+        MoveAndSlide();
 
         if (IsOnFloor()) {
             if (direction != 0) {
