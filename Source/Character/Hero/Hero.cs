@@ -3,8 +3,9 @@ using System;
 
 public partial class Hero : CharacterBody2D
 {
-    [Export] public double gravity = 500;
-    [Export] public double speed = 200;
+    [Export] public double gravity = 500.0d;
+    [Export] public double speed = 200.0d;
+    [Export] public double jumpImpulse = 100.0d; 
 
     protected enum HeroState {Idle, Move, Death, Jump, None};
     protected HeroState state = HeroState.None;
@@ -69,6 +70,13 @@ public partial class Hero : CharacterBody2D
         Vector2 velocity = Velocity;
         velocity.Y += (float)gravity * (float)delta;
 
+        Velocity = velocity;
+        MoveAndSlide();
+    }
+
+    protected void Jump() {
+        Vector2 velocity = Velocity;
+        velocity.Y = (float)jumpImpulse * -1.0f;
         Velocity = velocity;
         MoveAndSlide();
     }

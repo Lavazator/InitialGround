@@ -18,6 +18,12 @@ public partial class Cyborg : Hero
         if (GetDirection() != 0) {
             state = HeroState.Move;
         }
+
+        if (IsOnFloor() && Input.IsActionJustPressed("Jump")) {
+            state = HeroState.Jump;
+            Jump();
+            animationPlayer.Play("Cyborg/Jump");
+        }
     }
 
     public override void StateMove(double delta)
@@ -36,5 +42,14 @@ public partial class Cyborg : Hero
         }
 
         MoveAndSlide();
+    }
+
+    public override void StateJump(double delta)
+    {
+        base.StateJump(delta);
+
+        if (IsOnFloor()) {
+            state = HeroState.Idle;
+        }
     }
 }

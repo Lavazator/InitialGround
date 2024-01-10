@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://niqeuo6ont8c"]
+[gd_scene load_steps=11 format=3 uid="uid://niqeuo6ont8c"]
 
 [ext_resource type="PackedScene" uid="uid://dg700jmyxvep3" path="res://Scene/Characters/Hero/HeroTemplate.tscn" id="1_udrje"]
 [ext_resource type="Texture2D" uid="uid://bqy4ky0rxibil" path="res://StoreAssets/Character/Hero/Cyborg_Sheet.png" id="2_7i2mh"]
@@ -56,9 +56,25 @@ tracks/0/keys = {
 "values": [72, 73, 74, 75, 76, 77]
 }
 
+[sub_resource type="Animation" id="Animation_112gk"]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [56, 57, 58, 59]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qgnq2"]
 _data = {
 "Idle": SubResource("Animation_2qavc"),
+"Jump": SubResource("Animation_112gk"),
 "Move": SubResource("Animation_xae8r")
 }
 
@@ -67,6 +83,7 @@ size = Vector2(11, 31)
 
 [node name="Cyborg" instance=ExtResource("1_udrje")]
 script = ExtResource("2_ls4yo")
+jumpImpulse = 200.0
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource("2_7i2mh")
