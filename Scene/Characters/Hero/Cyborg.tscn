@@ -83,7 +83,7 @@ size = Vector2(11, 31)
 
 [node name="Cyborg" instance=ExtResource("1_udrje")]
 script = ExtResource("2_ls4yo")
-jumpImpulse = 120.0
+jumpImpulse = 200.0
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource("2_7i2mh")

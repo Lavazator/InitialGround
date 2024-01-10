@@ -16,13 +16,16 @@ public partial class Hero : CharacterBody2D
     protected Sprite2D sprite;
     protected AnimationPlayer animationPlayer;
 
+    // Constants
+    private const int FloorSnapLengthValue = 32;
+
     public override void _Ready()
     {
         base._Ready();
         sprite = GetNode<Sprite2D>("Sprite");
         animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 
-        FloorSnapLength = 32;
+        FloorSnapLength = FloorSnapLengthValue;
         FloorConstantSpeed = true;
     }
 
@@ -62,6 +65,7 @@ public partial class Hero : CharacterBody2D
         }
     }
 
+    // State Handlers
     public virtual void StateIdle(double delta) {}
     public virtual void StateMove(double delta) {}
     public virtual void StateJump(double delta) {}
@@ -78,6 +82,10 @@ public partial class Hero : CharacterBody2D
 
         Velocity = velocity;
         MoveAndSlide();
+    }
+
+    protected bool EnterJump() {
+        return IsOnFloor() && Input.IsActionJustPressed("Jump");
     }
 
     protected void StartJump() {

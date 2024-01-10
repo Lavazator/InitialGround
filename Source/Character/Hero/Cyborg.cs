@@ -24,7 +24,7 @@ public partial class Cyborg : Hero
             state = HeroState.Move;
         }
 
-        if (IsOnFloor() && Input.IsActionJustPressed("Jump")) {
+        if (EnterJump()) {
             StartJump();
         }
     }
@@ -40,7 +40,7 @@ public partial class Cyborg : Hero
             return;
         }
 
-        if (IsOnFloor() && Input.IsActionJustPressed("Jump")) {
+        if (EnterJump()) {
             StartJump();
             return;
         }
@@ -76,8 +76,14 @@ public partial class Cyborg : Hero
     {
         base.StateFall(delta);
 
+        Vector2 velocity = Velocity;
+        float direction = GetDirection();
+
+        velocity.X = (float)speed * direction;
+        Velocity = velocity;
+
         if (IsOnFloor()) {
-            if (GetDirection() != 0) {
+            if (direction != 0) {
                 state = HeroState.Move;
             } else {
                 state = HeroState.Idle;
