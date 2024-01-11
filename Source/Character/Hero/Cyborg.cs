@@ -17,7 +17,7 @@ public partial class Cyborg : Hero
     public override void StateIdle(double delta)
     {
         base.StateIdle(delta);
-        animationPlayer.Play("Cyborg/Idle");
+        PlayAnimLocal("Idle", 4.0f);
 
         if (GetDirection() != 0) {
             state = HeroState.Move;
@@ -65,8 +65,7 @@ public partial class Cyborg : Hero
 
         Velocity = velocity;
 
-        animationPlayer.Play("Cyborg/Move");
-
+        PlayAnimLocal("Move", 4.0f);
         MoveAndSlide();
     }
 
@@ -108,5 +107,12 @@ public partial class Cyborg : Hero
                 state = HeroState.Idle;
             }
         }
+    }
+
+    private void PlayAnimLocal(string anim, float left, float right = 0.0f) {
+        Vector2 position = sprite.Position;
+        position.X = sprite.FlipH ? left : right;
+        sprite.Position = position;
+        animationPlayer.Play("Cyborg/" + anim);
     }
 }
