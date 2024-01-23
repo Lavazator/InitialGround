@@ -15,6 +15,7 @@ public partial class Hero : CharacterBody2D
     // Node
     protected Sprite2D sprite;
     protected AnimationPlayer animationPlayer;
+    protected RemoteTransform2D remoteTransform;
 
     // Constants
     private const int FloorSnapLengthValue = 32;
@@ -24,6 +25,7 @@ public partial class Hero : CharacterBody2D
         base._Ready();
         sprite = GetNode<Sprite2D>("Sprite");
         animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        remoteTransform = GetNode<RemoteTransform2D>("RemoteTransform");
 
         FloorSnapLength = FloorSnapLengthValue;
         FloorConstantSpeed = true;
@@ -71,6 +73,12 @@ public partial class Hero : CharacterBody2D
     public virtual void StateJump(double delta) {}
     public virtual void StateFall(double delta) {}
     public virtual void StateDeath() {}
+
+
+    public void ConnectCamera(Camera2D camera) {
+        NodePath cameraPath = camera.GetPath();
+        remoteTransform.RemotePath = cameraPath;
+    }
 
     public float GetDirection() {
         return Input.GetAxis("MoveLeft", "MoveRight");
