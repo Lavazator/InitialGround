@@ -19,5 +19,4 @@ public partial class Level : Node2D
         camera.LimitBottom = boundaryBottom;
         camera.LimitLeft = boundaryLeft;
     }
-
 }
