@@ -113,4 +113,13 @@ public partial class Hero : CharacterBody2D
             state = HeroState.Fall;
         }
     }
+
+    void _OnSensorAreaEntered(Area2D area) {
+        
+        // Coins
+        if (area is Coin) {
+            GD.Print("Collect coin!");
+        }
+
+    }
 }

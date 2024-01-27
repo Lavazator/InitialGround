@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://3qlsabikopnf"]
+[gd_scene load_steps=5 format=3 uid="uid://3qlsabikopnf"]
 
 [ext_resource type="PackedScene" uid="uid://tuty70yol5mi" path="res://Scene/Tiles/green_zone.tscn" id="1_2bqk4"]
 [ext_resource type="Script" path="res://Source/Levels/Level.cs" id="1_36fnx"]
 [ext_resource type="PackedScene" uid="uid://niqeuo6ont8c" path="res://Scene/Characters/Hero/Cyborg.tscn" id="2_bpwwn"]
+[ext_resource type="PackedScene" uid="uid://c15q3tdt4a77l" path="res://Scene/Objects/Coin.tscn" id="4_gdnf8"]
 
 [node name="LevelTemplate" type="Node2D"]
 script = ExtResource("1_36fnx")
@@ -13,6 +14,7 @@ layer_0/tile_data = PackedInt32Array(589824, 65537, 0, 655360, 65537, 1, 720896,
 [node name="Cyborg" parent="." instance=ExtResource("2_bpwwn")]
 position = Vector2(51, 253)
 collision_layer = 1
+collision_mask = 1
 floor_constant_speed = false
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -20,3 +22,11 @@ limit_left = 0
 limit_top = 0
 limit_right = 1150
 limit_bottom = 730
+
+[node name="Items" type="Node2D" parent="."]
+
+[node name="Coin" parent="Items" instance=ExtResource("4_gdnf8")]
+position = Vector2(168, 264)
+
+[node name="Coin2" parent="Items" instance=ExtResource("4_gdnf8")]
+position = Vector2(192, 264)

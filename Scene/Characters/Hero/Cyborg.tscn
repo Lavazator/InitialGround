@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://niqeuo6ont8c"]
+[gd_scene load_steps=13 format=3 uid="uid://niqeuo6ont8c"]
 
 [ext_resource type="PackedScene" uid="uid://dg700jmyxvep3" path="res://Scene/Characters/Hero/HeroTemplate.tscn" id="1_udrje"]
 [ext_resource type="Texture2D" uid="uid://bqy4ky0rxibil" path="res://StoreAssets/Character/Hero/CyborgSheet.png" id="2_7i2mh"]
@@ -97,6 +97,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3s6w5"]
 size = Vector2(11.5, 30)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qmyv7"]
+size = Vector2(13, 30)
+
 [node name="Cyborg" instance=ExtResource("1_udrje")]
 script = ExtResource("2_ls4yo")
 jumpImpulse = 200.0
@@ -119,3 +122,8 @@ position = Vector2(2.25, 3)
 shape = SubResource("RectangleShape2D_3s6w5")
 
 [node name="RemoteTransform" type="RemoteTransform2D" parent="." index="4"]
+
+[node name="CollisionShape2D" parent="Sensor" index="0"]
+visible = false
+position = Vector2(3.5, 3)
+shape = SubResource("RectangleShape2D_qmyv7")

@@ -4,6 +4,7 @@
 
 [node name="HeroTemplate" type="CharacterBody2D"]
 collision_layer = 2
+collision_mask = 9
 floor_constant_speed = true
 script = ExtResource("1_sftew")
 
@@ -14,3 +15,12 @@ script = ExtResource("1_sftew")
 [node name="EffectPlayer" type="AnimationPlayer" parent="."]
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
+z_index = 1000
+
+[node name="Sensor" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sensor"]
+
+[connection signal="area_entered" from="Sensor" to="." method="_OnSensorAreaEntered"]
