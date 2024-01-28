@@ -97,8 +97,8 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3s6w5"]
 size = Vector2(11.5, 30)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qmyv7"]
-size = Vector2(13, 30)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jo7rq"]
+size = Vector2(17, 35)
 
 [node name="Cyborg" instance=ExtResource("1_udrje")]
 script = ExtResource("2_ls4yo")
@@ -123,7 +123,5 @@ shape = SubResource("RectangleShape2D_3s6w5")
 
 [node name="RemoteTransform" type="RemoteTransform2D" parent="." index="4"]
 
-[node name="CollisionShape2D" parent="Sensor" index="0"]
-visible = false
-position = Vector2(3.5, 3)
-shape = SubResource("RectangleShape2D_qmyv7")
+[node name="CollisionShape" parent="Sensor" index="0"]
+shape = SubResource("RectangleShape2D_jo7rq")

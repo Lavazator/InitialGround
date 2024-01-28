@@ -118,7 +118,9 @@ public partial class Hero : CharacterBody2D
         
         // Coins
         if (area is Coin) {
-            GD.Print("Collect coin!");
+            Coin coin = (Coin)area;
+            GameData.collectedCoins += coin.value;
+            coin.EmitSignal("Collected");
         }
 
     }

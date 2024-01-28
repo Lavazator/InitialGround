@@ -83,5 +83,5 @@ frame_progress = 0.708226
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ttygo")
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="Collected" from="." to="." method="OnCollected"]
+[connection signal="area_entered" from="." to="." method="_OnAreaEntered"]
