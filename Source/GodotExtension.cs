@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public static class GodotExtension
@@ -44,4 +45,5 @@ public static T GetParentByType<T>(this Node node)
 
         return null;
     }
+
 }

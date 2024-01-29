@@ -11,12 +11,12 @@ config_version=5
 [application]
 
 config/name="Simple Platformer"
-run/main_scene="res://Scene/Levels/LevelTemplate.tscn"
+run/main_scene="res://Scene/Main.tscn"
 config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
 
 [autoload]
 
-IngameData="*res://Source/Data/IngameData.cs"
+GameData="*res://Source/Data/GameData.cs"
 
 [dotnet]
 
