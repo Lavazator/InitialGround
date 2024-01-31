@@ -4,7 +4,7 @@ using System;
 public partial class Hero : CharacterBody2D
 {
 
-    [Signal] public delegate void CollectEventHandler(); 
+    [Signal] public delegate void CollectEventHandler(Collectable items); 
 
     [Export] public double gravity = 980.0d;
     [Export] public double speed = 200.0d;
@@ -124,6 +124,7 @@ public partial class Hero : CharacterBody2D
             Coin coin = (Coin)area;
             GameData.collectedCoins += coin.value;
             coin.EmitSignal("Collected");
+            EmitSignal("Collect", coin);
         }
 
     }

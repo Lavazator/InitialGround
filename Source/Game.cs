@@ -12,12 +12,18 @@ public partial class Game : Node2D
         player = GodotExtension.GetChildByType<Hero>(this);
         camera = GetNode<Camera2D>("Camera");
 
-        // set up the player camera
+        // set up the player
         player.ConnectCamera(camera);
+        player.Collect += HandleCollectable;
     }
 
     public override void _Process(double delta)
     {
         base._Process(delta);
+    }
+
+    private void HandleCollectable(Collectable items) {
+        if (items is Coin) {
+        } 
     }
 }
