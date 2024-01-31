@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Coin : Area2D
+public partial class Coin : Collectable
 {
     // Signal
     [Signal] public delegate void CollectedEventHandler();

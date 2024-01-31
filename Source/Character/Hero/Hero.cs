@@ -3,6 +3,9 @@ using System;
 
 public partial class Hero : CharacterBody2D
 {
+
+    [Signal] public delegate void CollectEventHandler(); 
+
     [Export] public double gravity = 980.0d;
     [Export] public double speed = 200.0d;
     [Export] public double jumpImpulse = 100.0d;
