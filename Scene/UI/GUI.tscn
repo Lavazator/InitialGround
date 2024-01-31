@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bdx1axqyihmdf"]
+[gd_scene load_steps=3 format=3 uid="uid://bdx1axqyihmdf"]
 
+[ext_resource type="Script" path="res://Source/UI/GUI.cs" id="1_4mr64"]
 [ext_resource type="PackedScene" uid="uid://bjul1jraa4uxt" path="res://Scene/UI/CoinUI.tscn" id="1_mov7r"]
 
 [node name="GUI" type="CanvasLayer"]
+script = ExtResource("1_4mr64")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -13,6 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="CoinUI" parent="Control" instance=ExtResource("1_mov7r")]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 38.0
 offset_top = 32.0

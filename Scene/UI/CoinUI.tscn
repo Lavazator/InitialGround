@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bjul1jraa4uxt"]
+[gd_scene load_steps=3 format=3 uid="uid://bjul1jraa4uxt"]
 
 [ext_resource type="Texture2D" uid="uid://dur6p31k75dte" path="res://StoreAssets/UI/CoinUI.png" id="1_5r66o"]
+[ext_resource type="Script" path="res://Source/UI/CoinUI.cs" id="1_nh4m3"]
 
 [node name="CoinUI" type="HBoxContainer"]
 offset_left = 21.0
@@ -8,6 +9,7 @@ offset_top = 9.0
 offset_right = 76.0
 offset_bottom = 32.0
 size_flags_horizontal = 4
+script = ExtResource("1_nh4m3")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 2
@@ -17,4 +19,5 @@ stretch_mode = 4
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
-text = "100"
+text = "0
+"
