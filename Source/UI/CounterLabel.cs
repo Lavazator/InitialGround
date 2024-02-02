@@ -1,31 +1,25 @@
 using Godot;
 
 public partial class CounterLabel : Label {
-
-    // Animated Counter
-    private int currentValue;
-    private int targetValue;
-    private double animationDuration = 2.0d;
-    private double elapsedTime = 0.0d;
+    private int currentValue = 0;
 
     public override void _Process(double delta)
     {
-        base._Process(delta);
-
-        if (currentValue < targetValue) {
-            elapsedTime += delta;
-            double progress = elapsedTime / animationDuration;
-            currentValue = (int)Mathf.Lerp(currentValue, targetValue, progress);
-            UpdateText();
+        // Update the text only if necessary
+        string newValue = currentValue.ToString();
+        if (Text != newValue) {
+            Text = newValue;
         }
     }
 
-    private void UpdateText() {
-        Text = currentValue.ToString();
+    public void UpdateValue(int value) {
+        if (value != currentValue) {
+            Tween tween = CreateTween();
+            tween.TweenProperty(this, "currentValue", value, 1.0d);
+        }
     }
 
-    public void UpdateValue(int value) {
-        targetValue = value;
-        elapsedTime = 0.0d;
+    public void UpdateValueInstant(int value) {
+        Text = value.ToString();
     }
 }
