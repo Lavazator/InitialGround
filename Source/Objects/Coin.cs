@@ -7,7 +7,7 @@ public partial class Coin : Collectable
     [Signal] public delegate void CollectedEventHandler();
 
     // Export
-    [Export] public int value = 5;
+    [Export] public int value = 50000;
 
     // Node
     private AnimatedSprite2D _animatedSprite;

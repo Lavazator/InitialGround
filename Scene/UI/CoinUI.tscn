@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bjul1jraa4uxt"]
+[gd_scene load_steps=4 format=3 uid="uid://bjul1jraa4uxt"]
 
 [ext_resource type="Texture2D" uid="uid://dur6p31k75dte" path="res://StoreAssets/UI/CoinUI.png" id="1_5r66o"]
 [ext_resource type="Script" path="res://Source/UI/CoinUI.cs" id="1_nh4m3"]
+[ext_resource type="Script" path="res://Source/UI/CounterLabel.cs" id="3_4gvl5"]
 
 [node name="CoinUI" type="HBoxContainer"]
 offset_left = 21.0
@@ -21,3 +22,4 @@ stretch_mode = 4
 layout_mode = 2
 text = "0
 "
+script = ExtResource("3_4gvl5")
