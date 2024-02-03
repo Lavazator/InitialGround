@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://b3tg625ocryob"]
+
+[node name="WorldBlocker" type="StaticBody2D"]
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+debug_color = Color(0, 0, 0, 0.419608)
