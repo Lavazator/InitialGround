@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://l8jxtb6b43b2"]
 
 [ext_resource type="Script" path="res://Source/Game.cs" id="1_dxip4"]
-[ext_resource type="PackedScene" uid="uid://3qlsabikopnf" path="res://Scene/Levels/LevelTemplate.tscn" id="1_h7psd"]
+[ext_resource type="PackedScene" uid="uid://3qlsabikopnf" path="res://Scene/Levels/Level.tscn" id="1_h7psd"]
 [ext_resource type="PackedScene" uid="uid://bdx1axqyihmdf" path="res://Scene/UI/GUI.tscn" id="3_bm1ey"]
 [ext_resource type="PackedScene" uid="uid://niqeuo6ont8c" path="res://Scene/Characters/Hero/Cyborg.tscn" id="4_tg1x5"]
 
