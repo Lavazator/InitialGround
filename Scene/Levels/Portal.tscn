@@ -1,6 +1,10 @@
-[gd_scene format=3 uid="uid://5psd267mp3no"]
+[gd_scene load_steps=2 format=3 uid="uid://5psd267mp3no"]
+
+[ext_resource type="Script" path="res://Source/Level/Portal.cs" id="1_um83m"]
 
 [node name="Portal" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_um83m")
 
 [node name="Particles" type="CPUParticles2D" parent="."]
 amount = 15
@@ -19,3 +23,7 @@ scale_amount_min = 2.0
 scale_amount_max = 3.0
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
+debug_color = Color(1, 1, 1, 0.419608)
+
+[connection signal="body_entered" from="." to="." method="PlayerEntered"]
+[connection signal="body_exited" from="." to="." method="PlayerExited"]

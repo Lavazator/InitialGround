@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bgmh7abtjxrvn"]
+[gd_scene load_steps=8 format=3 uid="uid://bgmh7abtjxrvn"]
 
 [ext_resource type="PackedScene" uid="uid://3qlsabikopnf" path="res://Scene/Levels/Level.tscn" id="1_4utio"]
 [ext_resource type="PackedScene" uid="uid://c15q3tdt4a77l" path="res://Scene/Objects/Coin.tscn" id="2_ccfxj"]
@@ -8,6 +8,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2lyxt"]
 size = Vector2(128, 544)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7tgho"]
+size = Vector2(64, 80)
 
 [node name="Level1" instance=ExtResource("1_4utio")]
 boundryTop = 0
@@ -63,5 +66,10 @@ shape = SubResource("RectangleShape2D_2lyxt")
 [node name="Portal" parent="." index="3" instance=ExtResource("5_3yotk")]
 position = Vector2(1152, 416)
 
+[node name="CollisionShape" parent="Portal" index="1"]
+position = Vector2(-16, -8)
+shape = SubResource("RectangleShape2D_7tgho")
+
 [editable path="Blocker/WorldBlocker"]
 [editable path="Blocker/WorldBlocker2"]
+[editable path="Portal"]
