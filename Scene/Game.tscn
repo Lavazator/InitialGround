@@ -12,6 +12,9 @@ script = ExtResource("1_dxip4")
 position = Vector2(34, 250)
 
 [node name="Camera" type="Camera2D" parent="."]
+drag_vertical_enabled = true
+drag_top_margin = 0.5
+drag_bottom_margin = 0.5
 
 [node name="GUI" parent="." instance=ExtResource("3_bm1ey")]
 

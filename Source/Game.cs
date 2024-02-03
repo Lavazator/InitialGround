@@ -27,8 +27,6 @@ public partial class Game : Node2D
     public override void _Process(double delta)
     {
         base._Process(delta);
-        GD.Print(camera.LimitTop);
-        GD.Print(camera.LimitRight);
     }
 
     private void HandleCollectable(Collectable items) {
