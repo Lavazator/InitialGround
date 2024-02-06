@@ -3,6 +3,7 @@ using System;
 
 public partial class Portal : Area2D
 {
+    [Signal] public delegate void RequestLevelChangeEventHandler(PackedScene nextLevel);
     [Export] PackedScene NextLevel;
 
     private bool isPlayerEnter = false;
@@ -10,12 +11,8 @@ public partial class Portal : Area2D
     public override void _Process(double delta)
     {
         if (isPlayerEnter && Input.IsActionJustPressed("Interact")) {
-            ChangeScene();
+            EmitSignal("RequestLevelChange", NextLevel);
         }
-    }
-
-    private void ChangeScene() {
-        GD.Print(true);
     }
 
     private void PlayerEntered(Node2D body) {
