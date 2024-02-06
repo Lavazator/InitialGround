@@ -71,5 +71,8 @@ position = Vector2(1184, 352)
 position = Vector2(-1248, 176)
 shape = SubResource("RectangleShape2D_2lyxt")
 
+[node name="BasePosition" parent="." index="3"]
+position = Vector2(32, 416)
+
 [editable path="Blocker/WorldBlocker"]
 [editable path="Blocker/WorldBlocker2"]

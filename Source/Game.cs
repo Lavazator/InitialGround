@@ -28,14 +28,11 @@ public partial class Game : Node2D
         portal.RequestLevelChange += ChangeLevel;
     }
 
-    public override void _Process(double delta)
-    {
-        base._Process(delta);
-    }
-
-    private void ChangeLevel(PackedScene nextLevel) {
+    private void ChangeLevel(PackedScene NextLevel) {
+        Level nextLevel = (Level)NextLevel.Instantiate();
         level.QueueFree();
-        AddChild(nextLevel.Instantiate());
+        AddChild(nextLevel);
+        player.Position = nextLevel.initPosition;
     }
 
     private void HandleCollectable(Collectable items) {

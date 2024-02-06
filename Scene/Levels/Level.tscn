@@ -1,10 +1,13 @@
 [gd_scene load_steps=2 format=3 uid="uid://3qlsabikopnf"]
 
-[ext_resource type="Script" path="res://Scene/Levels/Level.cs" id="1_cv0w8"]
+[ext_resource type="Script" path="res://Source/Level/Level.cs" id="1_qsdk5"]
 
 [node name="Level" type="Node2D"]
-script = ExtResource("1_cv0w8")
+script = ExtResource("1_qsdk5")
 
 [node name="Items" type="Node2D" parent="."]
 
 [node name="Tilemap" type="Node2D" parent="."]
+
+[node name="BasePosition" type="Marker2D" parent="."]
+unique_name_in_owner = true
