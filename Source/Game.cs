@@ -11,7 +11,6 @@ public partial class Game : Node2D
 
     public override void _Ready()
     {
-        base._Ready();
         player = GodotExtension.GetChildByType<Hero>(this);
         camera = GetNode<Camera2D>("Camera");
         gui = GetNode<GUI>("GUI");
@@ -21,18 +20,22 @@ public partial class Game : Node2D
         // set up the player
         player.ConnectCamera(camera);
         player.Collect += HandleCollectable;
+        player.GlobalPosition = level.GetBaseLocalPosition();
 
-        // set up the level
         SetCameraLimit();
-
         portal.RequestLevelChange += ChangeLevel;
     }
 
+
     private void ChangeLevel(PackedScene NextLevel) {
-        Level nextLevel = (Level)NextLevel.Instantiate();
         level.QueueFree();
+        Level nextLevel = (Level)NextLevel.Instantiate();
+        level = nextLevel;
+
+        player.GlobalPosition = level.GetBaseLocalPosition();
+        portal = GodotExtension.GetChildByType<Portal>(level);
+        portal.RequestLevelChange += ChangeLevel;
         AddChild(nextLevel);
-        player.Position = nextLevel.initPosition;
     }
 
     private void HandleCollectable(Collectable items) {

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://tuty70yol5mi" path="res://Scene/Tiles/green_zone.tscn" id="2_cqxcb"]
 [ext_resource type="PackedScene" uid="uid://b3tg625ocryob" path="res://Scene/Levels/WorldBlocker.tscn" id="4_g54ey"]
 [ext_resource type="PackedScene" uid="uid://5psd267mp3no" path="res://Scene/Levels/Portal.tscn" id="5_3yotk"]
-[ext_resource type="PackedScene" uid="uid://bi650j1mohqfo" path="res://Scene/Levels/Level2.tscn" id="6_ir0pr"]
+[ext_resource type="PackedScene" uid="uid://dx68a4ivtr34s" path="res://Scene/Levels/Level2.tscn" id="6_ir0pr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2lyxt"]
 size = Vector2(128, 544)
@@ -71,6 +71,9 @@ NextLevel = ExtResource("6_ir0pr")
 [node name="CollisionShape" parent="Portal" index="1"]
 position = Vector2(-16, -8)
 shape = SubResource("RectangleShape2D_7tgho")
+
+[node name="BasePosition" parent="." index="4"]
+position = Vector2(16, 464)
 
 [editable path="Blocker/WorldBlocker"]
 [editable path="Blocker/WorldBlocker2"]

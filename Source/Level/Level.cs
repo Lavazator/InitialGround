@@ -9,15 +9,7 @@ public partial class Level : Node2D
     [Export] public int boundryBottom = 10000000;
     [Export] public int boundryLeft = -10000000;
 
-    // Node
-    private Marker2D basePosition;
-
-    // Property
-    public Vector2 initPosition;
-
-    public override void _Ready()
-    {
-        basePosition = GetNode<Marker2D>("%BasePosition");
-        initPosition = basePosition.Position;
+    public Vector2 GetBaseLocalPosition() {
+        return  GetNode<Marker2D>("BasePosition").Position;
     }
 }
