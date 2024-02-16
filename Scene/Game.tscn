@@ -8,14 +8,16 @@
 [node name="Game" type="Node2D"]
 script = ExtResource("1_dxip4")
 
-[node name="Cyborg" parent="." instance=ExtResource("4_tg1x5")]
-position = Vector2(1055, 409)
+[node name="GUI" parent="." instance=ExtResource("3_bm1ey")]
 
 [node name="Camera" type="Camera2D" parent="."]
 drag_vertical_enabled = true
 drag_top_margin = 0.5
 drag_bottom_margin = 0.5
 
-[node name="GUI" parent="." instance=ExtResource("3_bm1ey")]
-
 [node name="Level1" parent="." instance=ExtResource("4_oq08a")]
+
+[node name="Cyborg" parent="." instance=ExtResource("4_tg1x5")]
+z_index = 0
+y_sort_enabled = false
+position = Vector2(1055, 409)

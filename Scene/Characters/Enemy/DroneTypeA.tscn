@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://mq4g5kiahqaj"]
+
+[ext_resource type="PackedScene" uid="uid://bonh3tbem8hde" path="res://Scene/Characters/Enemy/Enemy.tscn" id="1_f70m0"]
+[ext_resource type="Texture2D" uid="uid://c0cpkg6fjlvli" path="res://StoreAssets/Character/Enemy/DroneTypeASheet.png" id="2_3wje3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0k1lm"]
+size = Vector2(17, 18)
+
+[node name="DroneTypeA" instance=ExtResource("1_f70m0")]
+collision_layer = 4
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_3wje3")
+hframes = 4
+vframes = 4
+
+[node name="CollisionShape" parent="." index="3"]
+position = Vector2(-1.5, 15)
+shape = SubResource("RectangleShape2D_0k1lm")

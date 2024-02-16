@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bgmh7abtjxrvn"]
+[gd_scene load_steps=10 format=3 uid="uid://bgmh7abtjxrvn"]
 
 [ext_resource type="PackedScene" uid="uid://3qlsabikopnf" path="res://Scene/Levels/Level.tscn" id="1_4utio"]
 [ext_resource type="PackedScene" uid="uid://c15q3tdt4a77l" path="res://Scene/Objects/Coin.tscn" id="2_ccfxj"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b3tg625ocryob" path="res://Scene/Levels/WorldBlocker.tscn" id="4_g54ey"]
 [ext_resource type="PackedScene" uid="uid://5psd267mp3no" path="res://Scene/Levels/Portal.tscn" id="5_3yotk"]
 [ext_resource type="PackedScene" uid="uid://dx68a4ivtr34s" path="res://Scene/Levels/Level2.tscn" id="6_ir0pr"]
+[ext_resource type="PackedScene" uid="uid://mq4g5kiahqaj" path="res://Scene/Characters/Enemy/DroneTypeA.tscn" id="7_5kpnj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2lyxt"]
 size = Vector2(128, 544)
@@ -74,6 +75,9 @@ shape = SubResource("RectangleShape2D_7tgho")
 
 [node name="BasePosition" parent="." index="4"]
 position = Vector2(16, 464)
+
+[node name="DroneTypeA" parent="." index="5" instance=ExtResource("7_5kpnj")]
+position = Vector2(440, 424)
 
 [editable path="Blocker/WorldBlocker"]
 [editable path="Blocker/WorldBlocker2"]

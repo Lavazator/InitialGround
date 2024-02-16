@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://Source/Character/Hero/Hero.cs" id="1_sftew"]
 
 [node name="HeroTemplate" type="CharacterBody2D"]
+z_index = 100
+y_sort_enabled = true
 collision_layer = 2
 collision_mask = 9
 floor_constant_speed = true
