@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bonh3tbem8hde"]
+
+[ext_resource type="Script" path="res://Source/Character/Enemy/Enemy.cs" id="1_dv55f"]
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_dv55f")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="EffectPlayer" type="AnimationPlayer" parent="."]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+
+[node name="Sensor" type="Area2D" parent="."]
