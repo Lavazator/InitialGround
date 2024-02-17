@@ -1,5 +1,5 @@
-using Godot;
 using System;
+using Godot;
 
 public partial class Game : Node2D
 {
@@ -26,8 +26,8 @@ public partial class Game : Node2D
         portal.RequestLevelChange += ChangeLevel;
     }
 
-
-    private void ChangeLevel(PackedScene NextLevel) {
+    private void ChangeLevel(PackedScene NextLevel)
+    {
         level.QueueFree();
         Level nextLevel = (Level)NextLevel.Instantiate();
         level = nextLevel;
@@ -38,13 +38,16 @@ public partial class Game : Node2D
         AddChild(nextLevel);
     }
 
-    private void HandleCollectable(Collectable items) {
-        if (items is Coin) {
+    private void HandleCollectable(Collectable items)
+    {
+        if (items is Coin)
+        {
             gui.UpdateCoin(GameData.collectedCoins);
-        } 
+        }
     }
 
-    private void SetCameraLimit() {
+    private void SetCameraLimit()
+    {
         camera.LimitTop = level.boundryTop;
         camera.LimitRight = level.boundryRight;
         camera.LimitBottom = level.boundryBottom;

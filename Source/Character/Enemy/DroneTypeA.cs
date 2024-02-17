@@ -1,25 +1,38 @@
 using Godot;
-using System;
 
 public partial class DroneTypeA : Enemy
 {
-    private enum EnemyState {Idle, Move, Death, Attack}
+    private enum EnemyState
+    {
+        Idle,
+        Move,
+        Death,
+        Attack
+    }
+
     private EnemyState state;
 
     // Property
-    [Export] private double moveSpeed = 100.0d;
-    [Export] private double gravity = 980.0d;
+    [Export]
+    private double moveSpeed = 100.0d;
+
+    [Export]
+    private double gravity = 980.0d;
     private double direction = 1.0d;
+
+    // Flag
+    private bool isHeroDetected = false;
 
     public override void _Ready()
     {
         base._Ready();
-        state = EnemyState.Move;
+        state = EnemyState.Idle;
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        switch (state) {
+        switch (state)
+        {
             case EnemyState.Idle:
                 StateIdle();
                 break;
@@ -29,11 +42,19 @@ public partial class DroneTypeA : Enemy
         }
     }
 
-    private void StateIdle() {
+    private void StateIdle()
+    {
+        if (isHeroDetected)
+        {
+            state = EnemyState.Move;
+            return;
+        }
+
         PlayAnim("Idle");
     }
 
-    private void StateMove(double delta) {
+    private void StateMove(double delta)
+    {
         Vector2 velocity = Velocity;
 
         velocity.X = (float)(moveSpeed * direction);
@@ -43,8 +64,25 @@ public partial class DroneTypeA : Enemy
         MoveAndSlide();
     }
 
-    private void PlayAnim(string animName) {
+    private void PlayAnim(string animName)
+    {
         animationPlayer.Play($"DroneTypeA/{animName}");
     }
 
+    private double GetHeroDirection(Vector2 HeroPosition)
+    {
+        double positionDifference = HeroPosition.X - GlobalPosition.X;
+        return positionDifference > 0 ? 1.0 : -1.0;
+    }
+
+    void OnBodyEntered(Node2D body)
+    {
+        if (body is Hero)
+        {
+            Hero hero = (Hero)body;
+
+            isHeroDetected = true;
+            direction = GetHeroDirection(hero.GlobalPosition);
+        }
+    }
 }
