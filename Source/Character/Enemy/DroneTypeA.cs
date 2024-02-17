@@ -22,6 +22,7 @@ public partial class DroneTypeA : Enemy
 
     // Flag
     private bool isHeroDetected = false;
+    private Hero heroDetected;
 
     public override void _Ready()
     {
@@ -58,6 +59,9 @@ public partial class DroneTypeA : Enemy
     {
         Vector2 velocity = Velocity;
 
+        if (heroDetected != null)
+            direction = GetHeroDirection(heroDetected.GlobalPosition);
+
         // Exit to idle state
         if (!isHeroDetected)
         {
@@ -90,6 +94,7 @@ public partial class DroneTypeA : Enemy
             Hero hero = (Hero)body;
 
             isHeroDetected = true;
+            heroDetected = hero;
             direction = GetHeroDirection(hero.GlobalPosition);
         }
     }
@@ -100,6 +105,7 @@ public partial class DroneTypeA : Enemy
         {
             Hero hero = (Hero)body;
             isHeroDetected = false;
+            heroDetected = null;
         }
     }
 }
