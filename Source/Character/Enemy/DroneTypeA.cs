@@ -9,11 +9,12 @@ public partial class DroneTypeA : Enemy
     // Property
     [Export] private double moveSpeed = 100.0d;
     [Export] private double gravity = 980.0d;
+    private double direction = 1.0d;
 
     public override void _Ready()
     {
         base._Ready();
-        state = EnemyState.Idle;
+        state = EnemyState.Move;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -21,6 +22,9 @@ public partial class DroneTypeA : Enemy
         switch (state) {
             case EnemyState.Idle:
                 StateIdle();
+                break;
+            case EnemyState.Move:
+                StateMove(delta);
                 break;
         }
     }
@@ -30,7 +34,13 @@ public partial class DroneTypeA : Enemy
     }
 
     private void StateMove(double delta) {
-        
+        Vector2 velocity = Velocity;
+
+        velocity.X = (float)(moveSpeed * direction);
+        Velocity = velocity;
+
+        PlayAnim("Move");
+        MoveAndSlide();
     }
 
     private void PlayAnim(string animName) {
