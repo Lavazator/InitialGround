@@ -72,7 +72,15 @@ public partial class DroneTypeA : Enemy
         velocity.X = (float)(moveSpeed * direction);
         Velocity = velocity;
 
-        PlayAnim("Move");
+        if (direction > 0)
+        {
+            PlayAnim("MoveRight");
+        }
+        else
+        {
+            PlayAnim("MoveLeft");
+        }
+
         MoveAndSlide();
     }
 
