@@ -3,7 +3,7 @@ using System;
 
 public partial class Enemy : CharacterBody2D
 {
-    protected int health;
+    [Export] protected int health;
 
     // Node
     protected Sprite2D sprite;
