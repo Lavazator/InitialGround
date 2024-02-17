@@ -44,6 +44,7 @@ public partial class DroneTypeA : Enemy
 
     private void StateIdle()
     {
+        // Exit to Move state
         if (isHeroDetected)
         {
             state = EnemyState.Move;
@@ -56,6 +57,13 @@ public partial class DroneTypeA : Enemy
     private void StateMove(double delta)
     {
         Vector2 velocity = Velocity;
+
+        // Exit to idle state
+        if (!isHeroDetected)
+        {
+            state = EnemyState.Idle;
+            return;
+        }
 
         velocity.X = (float)(moveSpeed * direction);
         Velocity = velocity;
@@ -83,6 +91,15 @@ public partial class DroneTypeA : Enemy
 
             isHeroDetected = true;
             direction = GetHeroDirection(hero.GlobalPosition);
+        }
+    }
+
+    void OnBodyExited(Node2D body)
+    {
+        if (body is Hero)
+        {
+            Hero hero = (Hero)body;
+            isHeroDetected = false;
         }
     }
 }

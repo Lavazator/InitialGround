@@ -101,3 +101,4 @@ shape = SubResource("RectangleShape2D_56cnx")
 debug_color = Color(0.964706, 0.0627451, 0, 0.0862745)
 
 [connection signal="body_entered" from="Sensor" to="." method="OnBodyEntered"]
+[connection signal="body_exited" from="Sensor" to="." method="OnBodyExited"]
