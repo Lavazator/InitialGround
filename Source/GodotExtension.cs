@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using Godot;
 
 public static class GodotExtension
@@ -26,24 +28,28 @@ public static class GodotExtension
         return null;
     }
 
-//acts like Unity's GetComponentInParent<T>
-public static T GetParentByType<T>(this Node node)
-    where T : Node
-    {
-        Node parent = node.GetParent();
-        if (parent != null)
+    //acts like Unity's GetComponentInParent<T>
+    public static T GetParentByType<T>(this Node node)
+        where T : Node
         {
-            if (parent is T parentT)
+            Node parent = node.GetParent();
+            if (parent != null)
             {
-                return parentT;
+                if (parent is T parentT)
+                {
+                    return parentT;
+                }
+                else
+                {
+                    return parent.GetParentByType<T>();
+                }
             }
-            else
-            {
-                return parent.GetParentByType<T>();
-            }
+
+            return null;
         }
 
-        return null;
+    public static void PrintList<T>(List<T> list) {
+        GD.Print(string.Join(", ", list));
     }
 
 }

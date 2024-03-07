@@ -5,12 +5,15 @@ public partial class DroneTypeA : Enemy
     private enum EnemyState
     {
         Idle,
-        Move,
+        Chase,
         Death,
         Attack
     }
 
     private EnemyState state;
+
+    // Node
+    private WanderControllerA wanderController;
 
     // Property
     [Export]
@@ -27,35 +30,41 @@ public partial class DroneTypeA : Enemy
     public override void _Ready()
     {
         base._Ready();
+        wanderController = GetNode<WanderControllerA>("WanderControllerA");
+
         state = EnemyState.Idle;
     }
 
     public override void _PhysicsProcess(double delta)
     {
+        if (Input.IsActionJustPressed("Interact")) {
+            GodotExtension.PrintList(wanderController.waypoints);
+        }
+
         switch (state)
         {
             case EnemyState.Idle:
                 StateIdle();
                 break;
-            case EnemyState.Move:
-                StateMove(delta);
+            case EnemyState.Chase:
+                StateChase(delta);
                 break;
         }
     }
 
     private void StateIdle()
     {
-        // Exit to Move state
+        // Exit to Chase state
         if (isHeroDetected)
         {
-            state = EnemyState.Move;
+            state = EnemyState.Chase;
             return;
         }
 
         PlayAnim("Idle");
     }
 
-    private void StateMove(double delta)
+    private void StateChase(double delta)
     {
         Vector2 velocity = Velocity;
 

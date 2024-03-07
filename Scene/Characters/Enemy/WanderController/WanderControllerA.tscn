@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpgu8gr8fk0u0"]
+
+[ext_resource type="Script" path="res://Source/Character/Enemy/WanderController/WanderControllerA.cs" id="1_s3j0g"]
+
+[node name="WanderControllerA" type="Node2D"]
+script = ExtResource("1_s3j0g")
