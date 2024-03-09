@@ -82,7 +82,7 @@ position = Vector2(440, 424)
 [node name="WanderControllerA" parent="DroneTypeA" index="5"]
 waypointLimitLeft = 320
 waypointLimitRight = 768
-waypointAmount = 2
+waypointAmount = 5
 
 [editable path="Blocker/WorldBlocker"]
 [editable path="Blocker/WorldBlocker2"]

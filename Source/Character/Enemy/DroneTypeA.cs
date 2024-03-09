@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class DroneTypeA : Enemy
@@ -6,6 +7,7 @@ public partial class DroneTypeA : Enemy
     {
         Idle,
         Chase,
+        Wander,
         Death,
         Attack
     }
@@ -26,20 +28,29 @@ public partial class DroneTypeA : Enemy
     // Flag
     private bool isHeroDetected = false;
     private Hero heroDetected;
+    private Vector2 wanderWaypoint = Vector2.Zero;
 
     public override void _Ready()
     {
         base._Ready();
         wanderController = GetNode<WanderControllerA>("WanderControllerA");
 
+        wanderController.EnteringWander += OnEnterWander;
         state = EnemyState.Idle;
+    }
+
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+
+        if (Input.IsActionJustPressed("Interact")) {
+            wanderController.StartWander();
+        }
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        if (Input.IsActionJustPressed("Interact")) {
-            GodotExtension.PrintList(wanderController.waypoints);
-        }
+        base._PhysicsProcess(delta);
 
         switch (state)
         {
@@ -48,6 +59,9 @@ public partial class DroneTypeA : Enemy
                 break;
             case EnemyState.Chase:
                 StateChase(delta);
+                break;
+            case EnemyState.Wander:
+                StateWander(delta);
                 break;
         }
     }
@@ -81,16 +95,27 @@ public partial class DroneTypeA : Enemy
         velocity.X = (float)(moveSpeed * direction);
         Velocity = velocity;
 
-        if (direction > 0)
-        {
-            PlayAnim("MoveRight");
-        }
-        else
-        {
-            PlayAnim("MoveLeft");
-        }
-
+        PlayAnim(direction > 0 ? "MoveRight" : "MoveLeft");
         MoveAndSlide();
+    }
+
+    private void StateWander(double delta) {
+        Vector2 velocity = Velocity;
+        const double JITTER_THREESOLD = 10.0;
+        double positionDifference = wanderWaypoint.X - GlobalPosition.X;
+        double direction = positionDifference > 0 ? 1.0 : -1.0;
+
+        if (Math.Abs(positionDifference) > JITTER_THREESOLD) {
+            velocity.X = (float)(moveSpeed * direction);
+            Velocity = velocity;
+
+            PlayAnim(direction > 0 ? "MoveRight" : "MoveLeft");
+            MoveAndSlide();
+        }
+        else {
+            state = EnemyState.Idle;
+            wanderWaypoint = Vector2.Zero;
+        }
     }
 
     private void PlayAnim(string animName)
@@ -124,5 +149,10 @@ public partial class DroneTypeA : Enemy
             isHeroDetected = false;
             heroDetected = null;
         }
+    }
+
+    void OnEnterWander(int waypoint) {
+        wanderWaypoint.X = waypoint;
+        state = EnemyState.Wander;
     }
 }

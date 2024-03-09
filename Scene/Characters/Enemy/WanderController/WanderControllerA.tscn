@@ -4,3 +4,6 @@
 
 [node name="WanderControllerA" type="Node2D"]
 script = ExtResource("1_s3j0g")
+
+[node name="DelayTimer" type="Timer" parent="."]
+one_shot = true

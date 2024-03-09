@@ -47,6 +47,9 @@ public static class GodotExtension
 
             return null;
         }
+}
+
+public static class ListExtension {
 
     public static void PrintList<T>(List<T> list) {
         GD.Print(string.Join(", ", list));

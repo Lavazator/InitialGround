@@ -9,20 +9,40 @@ using System.Linq;
 
 public partial class WanderControllerA : Node2D
 {
-    // Waypoints field
-    [ExportCategory("Waypoints properties")]
+    [ExportCategory("Wander Properties")]
+
+    [ExportGroup("Waypoints properties")]
     [Export] int waypointLimitLeft = 0;
     [Export] int waypointLimitRight = 0;
     [Export(PropertyHint.Range, "0, 5")] int waypointAmount = 0;
 
+    [ExportGroup("Wander time")]
+    [Export(PropertyHint.Range, "1, 10")] double wanderTimeDelay;
+
+    // Signal
+    [Signal] public delegate void EnteringWanderEventHandler(int waypoint);
+
+    // Node
+    private Timer delayTimer;
+
     // Fields
-    public List<int> waypoints;
+    private List<int> waypoints;
+
+    // Flag
+    private int targetWaypoint;
 
     public override void _Ready()
     {
         base._Ready();
         GD.Randomize();
+
+        delayTimer = GetNode<Timer>("DelayTimer");
         waypoints = GetRandomWaypoints();
+    }
+
+    public void StartWander() {
+        targetWaypoint = GetWaypoint();
+        EmitSignal("EnteringWander", targetWaypoint);
     }
 
     private List<int> GetRandomWaypoints() {
@@ -35,5 +55,16 @@ public partial class WanderControllerA : Node2D
         }
 
         return waypoints; // Return the populated list
+    }
+
+    private int GetWaypoint() {
+        Random random = new();
+
+        if (targetWaypoint == 0) {
+            return waypoints[random.Next(0, waypoints.Count)];
+        }
+
+        List<int> filteredWaypoints = waypoints.Where(num => num != targetWaypoint).ToList();
+        return filteredWaypoints[random.Next(0, filteredWaypoints.Count)];
     }
 }
