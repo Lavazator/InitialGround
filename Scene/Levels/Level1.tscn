@@ -79,9 +79,9 @@ position = Vector2(16, 464)
 [node name="DroneTypeA" parent="." index="5" instance=ExtResource("7_5kpnj")]
 position = Vector2(440, 424)
 
-[node name="WanderControllerA" parent="DroneTypeA" index="5"]
-waypointLimitLeft = 320
-waypointLimitRight = 768
+[node name="WanderControllerA" parent="DroneTypeA/StateController" index="0"]
+waypointLimitLeft = 336
+waypointLimitRight = 704
 waypointAmount = 5
 
 [editable path="Blocker/WorldBlocker"]

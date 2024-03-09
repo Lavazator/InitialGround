@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 
 public partial class DroneTypeA : Enemy
@@ -12,10 +13,10 @@ public partial class DroneTypeA : Enemy
         Attack
     }
 
-    private EnemyState state;
 
     // Node
     private WanderControllerA wanderController;
+    private Timer stateChangeTimer;
 
     // Property
     [Export]
@@ -26,26 +27,30 @@ public partial class DroneTypeA : Enemy
     private double direction = 1.0d;
 
     // Flag
+    private EnemyState state;
+    private readonly Random random;
     private bool isHeroDetected = false;
     private Hero heroDetected;
     private Vector2 wanderWaypoint = Vector2.Zero;
 
+    private void Init() {
+        state = EnemyState.Idle;
+        stateChangeTimer.Start(2.0d);
+    }
+
     public override void _Ready()
     {
         base._Ready();
-        wanderController = GetNode<WanderControllerA>("WanderControllerA");
-
+        wanderController = GetNode<WanderControllerA>("%WanderControllerA");
+        stateChangeTimer = GetNode<Timer>("%StateChangeTimer");
+    
         wanderController.EnteringWander += OnEnterWander;
-        state = EnemyState.Idle;
+        Init();
     }
 
     public override void _Process(double delta)
     {
         base._Process(delta);
-
-        if (Input.IsActionJustPressed("Interact")) {
-            wanderController.StartWander();
-        }
     }
 
     public override void _PhysicsProcess(double delta)
@@ -68,6 +73,11 @@ public partial class DroneTypeA : Enemy
 
     private void StateIdle()
     {
+
+        if (stateChangeTimer.IsStopped()) {
+            stateChangeTimer.Start(2.0d);
+        }
+
         // Exit to Chase state
         if (isHeroDetected)
         {
@@ -129,7 +139,7 @@ public partial class DroneTypeA : Enemy
         return positionDifference > 0 ? 1.0 : -1.0;
     }
 
-    void OnBodyEntered(Node2D body)
+    private void OnBodyEntered(Node2D body)
     {
         if (body is Hero)
         {
@@ -141,7 +151,7 @@ public partial class DroneTypeA : Enemy
         }
     }
 
-    void OnBodyExited(Node2D body)
+    private void OnBodyExited(Node2D body)
     {
         if (body is Hero)
         {
@@ -151,8 +161,21 @@ public partial class DroneTypeA : Enemy
         }
     }
 
-    void OnEnterWander(int waypoint) {
+    private void OnEnterWander(int waypoint) {
         wanderWaypoint.X = waypoint;
         state = EnemyState.Wander;
+    }
+
+    private void OnStateChangeTimeout() {
+        List<EnemyState> states = [EnemyState.Idle, EnemyState.Wander];
+        EnemyState newState = ListExtension.GetShuffleItem(states);
+
+        if (newState == EnemyState.Idle) {
+            state = EnemyState.Idle;
+            stateChangeTimer.Start(2.0d);
+        }
+        else if (newState == EnemyState.Wander) {
+            wanderController.StartWander();
+        }
     }
 }

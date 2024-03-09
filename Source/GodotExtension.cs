@@ -50,9 +50,16 @@ public static class GodotExtension
 }
 
 public static class ListExtension {
+    private static Random random = new();
 
     public static void PrintList<T>(List<T> list) {
         GD.Print(string.Join(", ", list));
+    }
+
+    public static T GetShuffleItem<T>(List<T> list) {
+        int randomIndex = random.Next(0, list.Count);
+        T item = list[randomIndex];
+        return item;
     }
 
 }
