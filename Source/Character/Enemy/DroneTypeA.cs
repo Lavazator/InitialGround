@@ -4,8 +4,7 @@ using Godot;
 
 public partial class DroneTypeA : Enemy
 {
-    private enum EnemyState
-    {
+    private enum EnemyState {
         Idle,
         Chase,
         Wander,
@@ -19,10 +18,12 @@ public partial class DroneTypeA : Enemy
     private Timer stateChangeTimer;
 
     // Property
-    [Export]
-    private double moveSpeed = 100.0d;
+    [ExportGroup("Attributes")]
+    [Export] private double moveSpeed = 100.0d;
 
-    [Export]
+    [ExportGroup("Wander Properties")]
+    [Export(PropertyHint.Range, "1,10,1")] private double wanderTimeDelay = 1.0d;
+    
     private double gravity = 980.0d;
     private double direction = 1.0d;
 
@@ -35,11 +36,10 @@ public partial class DroneTypeA : Enemy
 
     private void Init() {
         state = EnemyState.Idle;
-        stateChangeTimer.Start(2.0d);
+        stateChangeTimer.Start(wanderTimeDelay);
     }
 
-    public override void _Ready()
-    {
+    public override void _Ready() {
         base._Ready();
         wanderController = GetNode<WanderControllerA>("%WanderControllerA");
         stateChangeTimer = GetNode<Timer>("%StateChangeTimer");
@@ -48,17 +48,14 @@ public partial class DroneTypeA : Enemy
         Init();
     }
 
-    public override void _Process(double delta)
-    {
+    public override void _Process(double delta) {
         base._Process(delta);
     }
 
-    public override void _PhysicsProcess(double delta)
-    {
+    public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
 
-        switch (state)
-        {
+        switch (state) {
             case EnemyState.Idle:
                 StateIdle();
                 break;
@@ -71,16 +68,14 @@ public partial class DroneTypeA : Enemy
         }
     }
 
-    private void StateIdle()
-    {
+    private void StateIdle() {
 
         if (stateChangeTimer.IsStopped()) {
-            stateChangeTimer.Start(2.0d);
+            stateChangeTimer.Start(wanderTimeDelay);
         }
 
         // Exit to Chase state
-        if (isHeroDetected)
-        {
+        if (isHeroDetected) {
             state = EnemyState.Chase;
             return;
         }
@@ -88,16 +83,14 @@ public partial class DroneTypeA : Enemy
         PlayAnim("Idle");
     }
 
-    private void StateChase(double delta)
-    {
+    private void StateChase(double delta) {
         Vector2 velocity = Velocity;
 
         if (heroDetected != null)
             direction = GetHeroDirection(heroDetected.GlobalPosition);
 
         // Exit to idle state
-        if (!isHeroDetected)
-        {
+        if (!isHeroDetected) {
             state = EnemyState.Idle;
             return;
         }
@@ -128,34 +121,26 @@ public partial class DroneTypeA : Enemy
         }
     }
 
-    private void PlayAnim(string animName)
-    {
+    private void PlayAnim(string animName) {
         animationPlayer.Play($"DroneTypeA/{animName}");
     }
 
-    private double GetHeroDirection(Vector2 HeroPosition)
-    {
+    private double GetHeroDirection(Vector2 HeroPosition) {
         double positionDifference = HeroPosition.X - GlobalPosition.X;
         return positionDifference > 0 ? 1.0 : -1.0;
     }
 
-    private void OnBodyEntered(Node2D body)
-    {
-        if (body is Hero)
+    private void OnBodyEntered(Node2D body) {
+        if (body is Hero hero)
         {
-            Hero hero = (Hero)body;
-
             isHeroDetected = true;
             heroDetected = hero;
             direction = GetHeroDirection(hero.GlobalPosition);
         }
     }
 
-    private void OnBodyExited(Node2D body)
-    {
-        if (body is Hero)
-        {
-            Hero hero = (Hero)body;
+    private void OnBodyExited(Node2D body) {
+        if (body is Hero) {
             isHeroDetected = false;
             heroDetected = null;
         }
@@ -172,7 +157,7 @@ public partial class DroneTypeA : Enemy
 
         if (newState == EnemyState.Idle) {
             state = EnemyState.Idle;
-            stateChangeTimer.Start(2.0d);
+            stateChangeTimer.Start(wanderTimeDelay);
         }
         else if (newState == EnemyState.Wander) {
             wanderController.StartWander();

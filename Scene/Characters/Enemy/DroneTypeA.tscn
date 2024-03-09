@@ -163,7 +163,7 @@ size = Vector2(194.311, 18)
 collision_layer = 4
 script = ExtResource("2_2575q")
 moveSpeed = 100.0
-gravity = 980.0
+wanderTimeDelay = 1.0
 
 [node name="Sprite" parent="." index="0"]
 position = Vector2(1, 0)
